@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
+  database: line_message_test_production
+  username: line_message_test
+  password: <%= ENV['LINE_MESSAGE_TEST_DATABASE_PASSWORD'] %>
