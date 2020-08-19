@@ -1,5 +1,11 @@
 class LinebotController < ApplicationController
+  # line-botの利用を許可
   require 'line/bot'
+  # callbackアクションのCSRF対策の設定を無効化
+  # なぜ無効化の設定が必要なの？
+  # webhookを利用するからCSRF対策を無効化
+  # webhookとは
+  # CSRF対策とは
   protect_from_forgery :except => [:callback]
 
   def client
