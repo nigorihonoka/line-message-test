@@ -4,7 +4,8 @@ LINEのMessaging APIの学習にBotを作成し、学習メモを作ること
 
 # 使い方
 1. iPhoneなどでLINEを下のQRコードから友達登録する
-[![Image from Gyazo](https://i.gyazo.com/749ade2abfb0d9f353d28b7c8a61980e.png)](https://gyazo.com/749ade2abfb0d9f353d28b7c8a61980e)
+<!-- [![Image from Gyazo](https://i.gyazo.com/749ade2abfb0d9f353d28b7c8a61980e.png)](https://gyazo.com/749ade2abfb0d9f353d28b7c8a61980e) -->
+<img src="https://gyazo.com/749ade2abfb0d9f353d28b7c8a61980e", width="250", height="250">
 
 1. 「アンケート」とメッセージを送信すると、下の画像の様な返信がある
 ![CBCB6522-318E-4487-A7AF-DF7DE99EB00B_1_105_c](https://user-images.githubusercontent.com/67264740/90844207-56463100-e39e-11ea-9c72-067fddb5023d.jpeg)
