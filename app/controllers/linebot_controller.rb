@@ -17,6 +17,8 @@ class LinebotController < ApplicationController
   protect_from_forgery :except => [:callback]
 
   def client
+    # a ||= xxx とした時、||= の意味はa が 偽 か 未定義 なら a に xxx を代入する
+    # Line::Bot::Clientのインスタンスを作成
     @client ||= Line::Bot::Client.new { |config|
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
@@ -24,6 +26,7 @@ class LinebotController < ApplicationController
   end
 
   def callback
+    # JSONでPOSTリクエストを受けた際に、受け渡されるパラメーターを読み込み代入している
     body = request.body.read
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
