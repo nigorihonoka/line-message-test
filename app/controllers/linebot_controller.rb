@@ -7,7 +7,7 @@ class LinebotController < ApplicationController
 
   # webhookとは
   # Webアプリケーション同士が連携するときの考え方の一つ、 Webアプリケーションでイベントが実行された際、外部サービスにHTTPで通知する仕組み
-  # 今回の場合だと、LINEでメッセージが送られた時に連携したこのアプリに通知され、設定したメッセージを送信する。
+  # 今回の場合だと、友だち追加やメッセージの送信のようなイベントが発生すると、LINEプラットフォームからWebhook URL（ボットサーバー）にHTTPS POSTリクエストが送信される
 
   # CSRF(クロスサイト・リクエストフォージェリ)対策
   # webアプリケーションの脆弱性をついた攻撃、
@@ -28,7 +28,7 @@ class LinebotController < ApplicationController
   def callback
     # JSONでPOSTリクエストを受けた際に、受け渡されるパラメーターを読み込み代入している
     body = request.body.read
-
+    # リクエストがLINEプラットフォームから送られたことを確認するために、ボットサーバーでリクエストヘッダーのX-Line-Signatureに含まれる署名を検証
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
       head :bad_request
@@ -44,6 +44,7 @@ class LinebotController < ApplicationController
           # LINEから送られてきたメッセージが「アンケート」と一致するかチェック
           if event.message['text'].eql?('アンケート')
             # private内のtemplateメソッドを呼び出します。
+            # replyTokenはイベントへの応答に使用するトークン
             client.reply_message(event['replyToken'], template)
           end
         end
