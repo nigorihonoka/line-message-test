@@ -28,9 +28,12 @@ class LinebotController < ApplicationController
   def callback
     # JSONでPOSTリクエストを受けた際に、受け渡されるパラメーターを読み込み代入している
     body = request.body.read
-    # リクエストがLINEプラットフォームから送られたことを確認するために、ボットサーバーでリクエストヘッダーのX-Line-Signatureに含まれる署名を検証
+    # X-Line-Signatureリクエストヘッダーに含まれる署名を検証して、リクエストがLINEプラットフォームから送信されたことを確認する必要がある
     signature = request.env['HTTP_X_LINE_SIGNATURE']
+    # リクエストの署名検証をおこなう
     unless client.validate_signature(body, signature)
+    # headメソッドでヘッダだけで本文 (body) のないレスポンスをブラウザに送信する
+    # :bad_requestはブラウザに送信する内容
       head :bad_request
     end
 
